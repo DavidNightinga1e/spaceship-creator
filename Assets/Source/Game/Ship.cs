@@ -16,6 +16,8 @@ namespace Game
 			var shipInjectables = GetComponentsInChildren<IShipInjectable>();
 			foreach (IShipInjectable shipInjectable in shipInjectables) 
 				shipInjectable.InjectShip(this);
+
+			rb.maxAngularVelocity = 100f;
 		}
 	}
 }
