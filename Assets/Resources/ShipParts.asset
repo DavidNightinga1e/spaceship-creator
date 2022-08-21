@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093a3c760a99478694116494e9b4543e, type: 3}
+  m_Name: ShipParts
+  m_EditorClassIdentifier: 
+  shipParts:
+  - {fileID: 680617188511086479, guid: 8427fd126a3945e48acfb564d56622ef, type: 3}
+  - {fileID: 3910730085406411571, guid: a1af45d1782863b4e949551ffddda007, type: 3}
