@@ -2,7 +2,7 @@
 
 namespace Assembly
 {
-	public class CameraRotation : MonoBehaviour
+	public class CameraController : MonoBehaviour
 	{
 		private const float MaxPitch = 85f;
 		private const float MinPitch = -85f;
@@ -39,7 +39,7 @@ namespace Assembly
 
 			Transform cameraTransform = _camera.transform;
 			cameraTransform.SetPositionAndRotation(Vector3.forward * CameraDistanceFromCenter, Quaternion.identity);
-			cameraTransform.RotateAround(Vector3.zero, Vector3.right, _currentPitch);
+			cameraTransform.RotateAround(Vector3.zero, Vector3.left, _currentPitch);
 			cameraTransform.RotateAround(Vector3.zero, Vector3.up, _currentRotation);
 			cameraTransform.LookAt(Vector3.zero);
 			float targetZoom = Mathf.Lerp(MinCameraFov, MaxCameraFov, _currentZoom);

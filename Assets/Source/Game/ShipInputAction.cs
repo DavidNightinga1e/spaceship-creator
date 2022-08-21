@@ -2,7 +2,7 @@
 {
 	public enum ShipInputAction
 	{
-		Up,
+		Up = 0,
 		Down,
 		Left,
 		Right,
@@ -13,6 +13,8 @@
 		RollLeft,
 		RollRight,
 		YawLeft,
-		YawRight
+		YawRight,
+		
+		MaxValue
 	}
 }

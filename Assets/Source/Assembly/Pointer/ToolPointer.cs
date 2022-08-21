@@ -1,18 +1,23 @@
 ﻿using System;
+using Assembly.ShipParts;
 using Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assembly
+namespace Assembly.Pointer
 {
-	public class Pointer : MonoBehaviour
+	public class ToolPointer : MonoBehaviour
 	{
 		private const float BlockSize = 1f;
 
 		private Camera _camera;
 		private Material _material;
-		
+
 		private PointerMode _mode;
+
+		private bool _isPointerValid;
+		private Vector3 _pointerPosition;
+		private ShipPart _selectedPart;
 
 		public PointerMode Mode
 		{
@@ -20,7 +25,7 @@ namespace Assembly
 			set
 			{
 				_mode = value;
-				
+
 				Color color = value switch
 				{
 					PointerMode.Add => Color.cyan,
@@ -32,9 +37,7 @@ namespace Assembly
 			}
 		}
 
-		public bool IsPointerValid { get; private set; }
-		public Vector3 PointerPosition { get; private set; }
-		public ShipPart SelectedPart { get; private set; }
+		public ToolPointerState GetState() => new(_isPointerValid, _pointerPosition, _selectedPart);
 
 		private void Awake()
 		{
@@ -46,7 +49,7 @@ namespace Assembly
 		{
 			if (EventSystem.current.IsPointerOverGameObject())
 			{
-				IsPointerValid = false;
+				_isPointerValid = false;
 				return;
 			}
 
@@ -56,12 +59,12 @@ namespace Assembly
 			int editAndRemoveMask = LayerMask.GetMask("ShipPart");
 			int targetMask = Mode is PointerMode.Add ? addMask : editAndRemoveMask;
 			bool raycastResult = Physics.Raycast(ray, out RaycastHit hitInfo, 100f, targetMask);
-			
-			IsPointerValid = raycastResult;
-			
+
+			_isPointerValid = raycastResult;
+
 			if (!raycastResult)
 				return;
-			
+
 			Vector3 position = Mode switch
 			{
 				PointerMode.Add => hitInfo.point + hitInfo.normal * 0.1f,
@@ -70,7 +73,7 @@ namespace Assembly
 				_ => throw new ArgumentOutOfRangeException()
 			};
 
-			SelectedPart = Mode switch
+			_selectedPart = Mode switch
 			{
 				PointerMode.Add => null,
 				PointerMode.Edit => hitInfo.transform.GetComponent<ShipPart>(),
@@ -81,19 +84,19 @@ namespace Assembly
 			float x = Mathf.Floor(position.x / BlockSize) * BlockSize;
 			float y = Mathf.Floor(position.y / BlockSize) * BlockSize;
 			float z = Mathf.Floor(position.z / BlockSize) * BlockSize;
-			
+
 			var lowestPoint = new Vector3(x, y, z);
-			PointerPosition = lowestPoint;
+			_pointerPosition = lowestPoint;
 		}
 
 		private void OnRenderObject()
 		{
-			if (!IsPointerValid)
-				return; 
-			
+			if (!_isPointerValid)
+				return;
+
 			GL.Begin(GL.LINES);
 			_material.SetPass(0);
-			GLUtilities.DrawCube(PointerPosition, BlockSize);
+			GLUtilities.DrawCube(_pointerPosition, BlockSize);
 			GL.End();
 		}
 	}

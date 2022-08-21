@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3785814344862165411}
   - component: {fileID: 3785814344862165408}
   - component: {fileID: 3785814344862165409}
-  - component: {fileID: 1775177875001975387}
+  - component: {fileID: 3910730085406411571}
   m_Layer: 6
   m_Name: Thruster
   m_TagString: Untagged
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1775177875001975387
+--- !u!114 &3910730085406411571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,10 +108,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3785814344862165414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff619160afd4af6904921057c0f71dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e04e2b7ef2f412cb7e5a9cd849090ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipPartType: 1
 --- !u!1 &3928926813430888145
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-﻿namespace Assembly
+﻿namespace Assembly.Pointer
 {
 	public enum PointerMode
 	{
